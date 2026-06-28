@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Resources\HealthSnapshot;
+
+use App\Http\Resources\Recommendation\RecommendationResource;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class HealthSnapshotResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'id'            => $this->id,
+            'sleep_hours'   => $this->sleep_hours,
+            'glucose_level' => $this->glucose_level,
+            'heart_rate'    => $this->heart_rate,
+            'water_intake'  => $this->water_intake,
+            'measured_at'   => $this->measured_at,
+        ];
+    }
+}
