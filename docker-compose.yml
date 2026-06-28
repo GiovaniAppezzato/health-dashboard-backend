@@ -25,7 +25,7 @@ services:
     image: nginx:stable-alpine
     container_name: tecsa_webserver
     ports:
-      - "${APP_PORT:-8000}:80"
+      - "${APP_PORT:-9000}:80"
     volumes:
       - ./:/var/www/html
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
