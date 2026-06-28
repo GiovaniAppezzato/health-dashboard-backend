@@ -16,8 +16,6 @@ class RecommendationService
 
     public function generateFakeRecommendations(HealthSnapshot $healthSnapshot): void
     {
-        // @todo Replace fake recommendations with LLM-generated content.
-
         $recommendations = [
             'Priorize uma rotina de sono consistente para melhorar sua recuperação diária.',
             'Mantenha refeições equilibradas ao longo do dia para ajudar no controle da glicose.',
@@ -26,13 +24,11 @@ class RecommendationService
 
         collect($recommendations)
             ->map(function (string $content, int $index) use ($healthSnapshot): Recommendation {
-                $dto = new RecommendationDTO(
+                return $this->repository->save(new RecommendationDTO(
                     health_snapshot_id: $healthSnapshot->id,
                     position: $index + 1,
                     content: $content,
-                );
-
-                return $this->repository->save($dto);
+                ));
             });
     }
 }
