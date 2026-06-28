@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('glucose_level');
             $table->unsignedSmallInteger('heart_rate');
             $table->unsignedSmallInteger('water_intake');
-            $table->timestamp('measured_at');
+            $table->date('measured_at');
             $table->timestamps();
         });
     }

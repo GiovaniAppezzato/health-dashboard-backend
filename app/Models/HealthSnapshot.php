@@ -25,7 +25,7 @@ class HealthSnapshot extends Model
             'glucose_level' => 'integer',
             'heart_rate'    => 'integer',
             'water_intake'  => 'integer',
-            'measured_at'   => 'datetime',
+            'measured_at'   => 'date',
         ];
     }
 
