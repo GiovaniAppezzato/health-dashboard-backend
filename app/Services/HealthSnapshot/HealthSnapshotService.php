@@ -5,12 +5,14 @@ namespace App\Services\HealthSnapshot;
 use App\Models\HealthSnapshot;
 use App\DTOs\HealthSnapshotDTO;
 use App\Repositories\HealthSnapshot\HealthSnapshotRepository;
+use App\Services\Recommendation\RecommendationService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class HealthSnapshotService
 {
     public function __construct(
         protected HealthSnapshotRepository $repository,
+        protected RecommendationService $recommendationService
     ) {}
 
     public function list(): LengthAwarePaginator
@@ -35,6 +37,12 @@ class HealthSnapshotService
 
     public function save(HealthSnapshotDTO $healthSnapshotDTO): HealthSnapshot
     {
-        return $this->repository->save($healthSnapshotDTO);
+        $healthSnapshot = $this->repository->save($healthSnapshotDTO);
+
+        $this->recommendationService->generateFakeRecommendations($healthSnapshot);
+
+        $healthSnapshot->load('recommendations');
+
+        return $healthSnapshot;
     }
 }
