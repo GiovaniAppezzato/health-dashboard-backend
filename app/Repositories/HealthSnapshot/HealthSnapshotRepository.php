@@ -14,7 +14,7 @@ class HealthSnapshotRepository
 
     public function list(): LengthAwarePaginator
     {
-        return $this->model->paginate();
+        return $this->model->orderByDesc('measured_at')->paginate();
     }
 
     public function find(int $healthSnapshotId): ?HealthSnapshot
@@ -25,6 +25,11 @@ class HealthSnapshotRepository
     public function findByMeasuredAt(string $measuredAt): ?HealthSnapshot
     {
         return $this->model->whereDate('measured_at', $measuredAt)->first();
+    }
+
+    public function latest(): ?HealthSnapshot
+    {
+        return $this->model->latest('measured_at')->first();
     }
 
     public function save(HealthSnapshotDTO $healthSnapshotDTO): HealthSnapshot

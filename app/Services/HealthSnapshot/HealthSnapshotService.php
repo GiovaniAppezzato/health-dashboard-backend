@@ -28,6 +28,11 @@ class HealthSnapshotService
         return $this->repository->findByMeasuredAt($measuredAt);
     }
 
+    public function latest(): ?HealthSnapshot
+    {
+        return $this->repository->latest();
+    }
+
     public function save(HealthSnapshotDTO $healthSnapshotDTO): HealthSnapshot
     {
         return $this->repository->save($healthSnapshotDTO);

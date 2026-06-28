@@ -19,7 +19,7 @@ class UniqueHealthSnapshotMeasuredAt implements ValidationRule
         $healthSnapshot = app(HealthSnapshotService::class)->findByMeasuredAt($value);
 
         if ($healthSnapshot) {
-            $fail('Já um registro para a data informada, caso deseje editar o registro, utilize a rotina de edição.');
+            $fail('Já existe um registro para a data informada, caso deseje editar o registro, utilize a rotina de edição.');
         }
     }
 }

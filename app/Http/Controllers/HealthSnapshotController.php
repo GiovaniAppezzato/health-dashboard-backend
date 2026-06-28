@@ -28,6 +28,13 @@ class HealthSnapshotController extends Controller
         return new HealthSnapshotResource($healthSnapshot);
     }
 
+    public function latest(): HealthSnapshotResource
+    {
+        $healthSnapshot = $this->service->latest();
+
+        return new HealthSnapshotResource($healthSnapshot);
+    }
+
     public function store(StoreHealthSnapshotRequest $request): HealthSnapshotResource
     {
         $healthSnapshotDTO = HealthSnapshotDTO::fromRequest($request->validated());
