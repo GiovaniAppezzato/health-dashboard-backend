@@ -22,6 +22,11 @@ class HealthSnapshotRepository
         return $this->model->find($healthSnapshotId);
     }
 
+    public function findByMeasuredAt(string $measuredAt): ?HealthSnapshot
+    {
+        return $this->model->whereDate('measured_at', $measuredAt)->first();
+    }
+
     public function save(HealthSnapshotDTO $healthSnapshotDTO): HealthSnapshot
     {
         return $this->model->create($healthSnapshotDTO->toArray());

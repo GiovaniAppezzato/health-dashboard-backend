@@ -24,7 +24,7 @@ class HealthSnapshot extends Model
             'sleep_hours'   => 'decimal:2',
             'glucose_level' => 'integer',
             'heart_rate'    => 'integer',
-            'water_intake'  => 'integer',
+            'water_intake'  => 'decimal:2',
             'measured_at'   => 'date',
         ];
     }

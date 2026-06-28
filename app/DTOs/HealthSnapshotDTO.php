@@ -8,7 +8,7 @@ class HealthSnapshotDTO extends AbstractDTO
         public readonly ?int $sleep_hours,
         public readonly ?int $glucose_level,
         public readonly ?int $heart_rate,
-        public readonly ?int $water_intake,
+        public readonly ?float $water_intake,
         public readonly ?string $measured_at,
         public readonly ?int $id,
     ) {}

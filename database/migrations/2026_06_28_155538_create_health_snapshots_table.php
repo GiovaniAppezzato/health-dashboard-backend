@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('sleep_hours', 4, 2);
             $table->unsignedSmallInteger('glucose_level');
             $table->unsignedSmallInteger('heart_rate');
-            $table->unsignedSmallInteger('water_intake');
+            $table->decimal('water_intake', 4, 2);
             $table->date('measured_at');
             $table->timestamps();
         });

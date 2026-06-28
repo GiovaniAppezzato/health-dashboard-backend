@@ -23,6 +23,11 @@ class HealthSnapshotService
         return $this->repository->find($healthSnapshotId);
     }
 
+    public function findByMeasuredAt(string $measuredAt): ?HealthSnapshot
+    {
+        return $this->repository->findByMeasuredAt($measuredAt);
+    }
+
     public function save(HealthSnapshotDTO $healthSnapshotDTO): HealthSnapshot
     {
         return $this->repository->save($healthSnapshotDTO);

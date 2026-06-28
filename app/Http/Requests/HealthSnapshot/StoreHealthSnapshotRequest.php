@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\HealthSnapshot;
 
+use App\Rules\UniqueHealthSnapshotMeasuredAt;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,8 +27,8 @@ class StoreHealthSnapshotRequest extends FormRequest
             'sleep_hours'   => ['required', 'numeric', 'min:0', 'max:24'],
             'glucose_level' => ['required', 'integer', 'min:1'],
             'heart_rate'    => ['required', 'integer', 'min:1'],
-            'water_intake'  => ['required', 'integer', 'min:0'],
-            'measured_at'   => ['required', 'date'],
+            'water_intake'  => ['required', 'numeric', 'min:0'],
+            'measured_at'   => ['required', 'date', new UniqueHealthSnapshotMeasuredAt()],
         ];
     }
 }

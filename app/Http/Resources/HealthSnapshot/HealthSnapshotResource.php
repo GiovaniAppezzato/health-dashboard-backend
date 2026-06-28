@@ -17,11 +17,11 @@ class HealthSnapshotResource extends JsonResource
     {
         return [
             'id'            => $this->id,
-            'sleep_hours'   => $this->sleep_hours,
+            'sleep_hours'   => (float) $this->sleep_hours,
             'glucose_level' => $this->glucose_level,
             'heart_rate'    => $this->heart_rate,
-            'water_intake'  => $this->water_intake,
-            'measured_at'   => $this->measured_at,
+            'water_intake'  => (float) $this->water_intake,
+            'measured_at'   => $this->measured_at->format('Y-m-d'),
         ];
     }
 }
