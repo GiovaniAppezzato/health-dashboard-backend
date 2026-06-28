@@ -8,7 +8,6 @@ use App\Services\HealthSnapshot\HealthSnapshotService;
 use App\Http\Resources\HealthSnapshot\HealthSnapshotResource;
 use App\Http\Requests\HealthSnapshot\StoreHealthSnapshotRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 
 class HealthSnapshotController extends Controller
@@ -24,8 +23,10 @@ class HealthSnapshotController extends Controller
         return HealthSnapshotResource::collection($helthSnapshots);
     }
 
-    public function show(HealthSnapshot $healthSnapshot): HealthSnapshotResource
+    public function show(int $id): HealthSnapshotResource
     {
+        $healthSnapshot = $this->service->find($id);
+
         return new HealthSnapshotResource($healthSnapshot);
     }
 
@@ -40,7 +41,7 @@ class HealthSnapshotController extends Controller
     {
         $healthSnapshotDTO = HealthSnapshotDTO::fromRequest($request->validated());
 
-        $healthSnapshot = DB::transaction(fn () => $this->service->save($healthSnapshotDTO));
+        $healthSnapshot = $this->service->save($healthSnapshotDTO);
 
         return new HealthSnapshotResource($healthSnapshot);
     }

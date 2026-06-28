@@ -15,10 +15,8 @@ class RecommendationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'                 => $this->id,
-            'health_snapshot_id' => $this->health_snapshot_id,
-            'position'           => $this->position,
-            'content'            => $this->content,
+            'position' => $this->position,
+            'content' => $this->content,
         ];
     }
 }

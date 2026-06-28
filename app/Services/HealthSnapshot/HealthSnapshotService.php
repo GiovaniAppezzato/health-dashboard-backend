@@ -39,10 +39,8 @@ class HealthSnapshotService
     {
         $healthSnapshot = $this->repository->save($healthSnapshotDTO);
 
-        $this->recommendationService->generateFakeRecommendations($healthSnapshot);
+        $this->recommendationService->generate($healthSnapshot);
 
-        $healthSnapshot->load('recommendations');
-
-        return $healthSnapshot;
+        return $healthSnapshot->load('recommendations');
     }
 }

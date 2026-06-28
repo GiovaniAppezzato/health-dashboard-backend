@@ -5,16 +5,31 @@ namespace App\Services\Recommendation;
 use App\Models\Recommendation;
 use App\Models\HealthSnapshot;
 use App\DTOs\RecommendationDTO;
+use App\Services\AI\HealthRecommendationGenerator;
 use App\Repositories\Recommendation\RecommendationRepository;
-use Illuminate\Support\Collection;
 
 class RecommendationService
 {
     public function __construct(
         protected RecommendationRepository $repository,
+        protected HealthRecommendationGenerator $healthRecommendationGenerator
     ) {}
 
-    public function generateFakeRecommendations(HealthSnapshot $healthSnapshot): void
+    public function generate(HealthSnapshot $healthSnapshot): void
+    {
+        $recommendations = $this->healthRecommendationGenerator->handle($healthSnapshot);
+
+        collect($recommendations)
+            ->each(function (string $content, int $index) use ($healthSnapshot): Recommendation {
+                return $this->repository->save(new RecommendationDTO(
+                    health_snapshot_id: $healthSnapshot->id,
+                    position: $index + 1,
+                    content: $content,
+                ));
+            });
+    }
+
+    public function generateFake(HealthSnapshot $healthSnapshot): void
     {
         $recommendations = [
             'Priorize uma rotina de sono consistente para melhorar sua recuperação diária.',
@@ -23,7 +38,7 @@ class RecommendationService
         ];
 
         collect($recommendations)
-            ->map(function (string $content, int $index) use ($healthSnapshot): Recommendation {
+            ->each(function (string $content, int $index) use ($healthSnapshot): Recommendation {
                 return $this->repository->save(new RecommendationDTO(
                     health_snapshot_id: $healthSnapshot->id,
                     position: $index + 1,

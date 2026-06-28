@@ -14,22 +14,33 @@ class HealthSnapshotRepository
 
     public function list(): LengthAwarePaginator
     {
-        return $this->model->orderByDesc('measured_at')->paginate();
+        return $this->model->query()
+            ->with('recommendations')
+            ->orderByDesc('measured_at')
+            ->paginate();
     }
 
     public function find(int $healthSnapshotId): ?HealthSnapshot
     {
-        return $this->model->find($healthSnapshotId);
+        return $this->model->query()
+            ->with('recommendations')
+            ->find($healthSnapshotId);
     }
 
     public function findByMeasuredAt(string $measuredAt): ?HealthSnapshot
     {
-        return $this->model->whereDate('measured_at', $measuredAt)->first();
+        return $this->model->query()
+            ->with('recommendations')
+            ->whereDate('measured_at', $measuredAt)
+            ->first();
     }
 
     public function latest(): ?HealthSnapshot
     {
-        return $this->model->latest('measured_at')->first();
+        return $this->model->query()
+            ->with('recommendations')
+            ->latest('measured_at')
+            ->first();
     }
 
     public function save(HealthSnapshotDTO $healthSnapshotDTO): HealthSnapshot

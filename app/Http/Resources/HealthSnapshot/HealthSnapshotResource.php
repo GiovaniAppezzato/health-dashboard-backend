@@ -16,12 +16,13 @@ class HealthSnapshotResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'            => $this->id,
-            'sleep_hours'   => (float) $this->sleep_hours,
-            'glucose_level' => $this->glucose_level,
-            'heart_rate'    => $this->heart_rate,
-            'water_intake'  => (float) $this->water_intake,
-            'measured_at'   => $this->measured_at->format('Y-m-d'),
+            'id'              => $this->id,
+            'glucose_level'   => $this->glucose_level,
+            'heart_rate'      => $this->heart_rate,
+            'sleep_hours'     => (float) $this->sleep_hours,
+            'water_intake'    => (float) $this->water_intake,
+            'measured_at'     => $this->measured_at->format('Y-m-d'),
+            'recommendations' => RecommendationResource::collection($this->recommendations),
         ];
     }
 }
