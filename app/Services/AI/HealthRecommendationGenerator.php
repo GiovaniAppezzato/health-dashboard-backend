@@ -12,8 +12,6 @@ class HealthRecommendationGenerator
     {
         $response = OpenAI::responses()->create([
             'model' => config('openai.model'),
-            'instructions' => $this->instructions(),
-            'input' => $this->prompt($healthSnapshot),
             'temperature' => 0.4,
             'text' => [
                 'format' => [
@@ -36,7 +34,9 @@ class HealthRecommendationGenerator
                         ],
                     ],
                 ]
-            ]
+            ],
+            'instructions' => $this->instructions(),
+            'input'        => $this->prompt($healthSnapshot),
         ]);
 
         return $this->parseRecommendations($response->outputText);
