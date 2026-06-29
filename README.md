@@ -3,13 +3,6 @@
 [![Laravel](https://img.shields.io/badge/Laravel-13.17-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-# Introdução
-
-Este repositório contém a minha solução para o teste da Tecsa Group.
-
-Contato: <a href="https://www.linkedin.com/in/giovani-appezzato" target="_blank">LinkedIn</a> • giovani.appezzato@gmail.com
- • (19) 99494-7867
-
 ## Antes de instalar
 Certifique-se de que você tenha o Docker. Caso não tenha, siga o guia <a href="https://www.docker.com/get-started" target="_blank">Primeiros passos com o Docker</a>.
 
