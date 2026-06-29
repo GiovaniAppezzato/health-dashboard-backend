@@ -73,6 +73,20 @@ php artisan migrate
 **Tudo pronto!** 🎉  
 A aplicação estará disponível em: http://localhost:9000
 
+## Integração com OpenAI
+
+Este projeto utiliza a OpenAI para gerar recomendações personalizadas a partir dos biomarcadores informados pelo usuário.
+
+Para que essa funcionalidade funcione corretamente, preencha as variáveis abaixo no arquivo `.env`:
+
+```
+OPENAI_API_KEY=
+OPENAI_ORGANIZATION=
+OPENAI_MODEL=gpt-4o-mini
+```
+
+O campo `OPENAI_API_KEY` é obrigatório para a geração das recomendações via IA. O campo `OPENAI_ORGANIZATION` é opcional e pode ficar vazio caso sua conta não utilize organização.
+
 ## Execução dos testes
 
 Certifique-se que a aplicação esteja rodando corretamente e rode:
