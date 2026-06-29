@@ -17,7 +17,7 @@ class HealthSnapshotRepository
         return $this->model->query()
             ->with('recommendations')
             ->orderByDesc('measured_at')
-            ->paginate();
+            ->paginate(5);
     }
 
     public function find(int $healthSnapshotId): ?HealthSnapshot
