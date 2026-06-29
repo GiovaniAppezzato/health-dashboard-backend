@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libjpeg62-turbo-dev \
     libicu-dev \
+    libsqlite3-dev \
     python3
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -24,6 +25,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 RUN docker-php-ext-install -j$(nproc) \
     pdo_pgsql \
+    pdo_sqlite \
     pgsql \
     mbstring \
     exif \
