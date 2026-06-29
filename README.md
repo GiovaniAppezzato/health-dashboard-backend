@@ -1,58 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Introdução
 
-## About Laravel
+Este repositório contém a minha solução para o teste da Tecsa Group.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Contato: <a href="https://www.linkedin.com/in/giovani-appezzato" target="_blank">LinkedIn</a> • giovani.appezzato@gmail.com
+ • (19) 99494-7867
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Antes de instalar
+Certifique-se de que você tenha o Docker. Caso não tenha, siga o guia <a href="https://www.docker.com/get-started" target="_blank">Primeiros passos com o Docker</a>.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+O projeto conta com alguns comandos que ajudam a simplificar e agilizar o setup. Caso queira utilizá-los, é necessário ter o **Make** instalado no sistema.
 
-## Learning Laravel
+**Para Windows:**
+- Instale o [Chocolatey](https://chocolatey.org/install) e rode:
+  ```
+  choco install make
+  ```
+- Ou Instale diretamente o [GnuWin32](http://gnuwin32.sourceforge.net/packages/make.htm)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Para macOS:**
+- Instale via Homebrew:
+  ```
+  brew install make
+  ```
+- Ou instale as Ferramentas de Linha de Comando do Xcode:
+  ```
+  xcode-select --install
+  ```
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Para Linux:**
+- Debian/Ubuntu
+  ```
+  sudo apt-get install make
+  ```
+- Red Hat/CentOS
+  ```
+  sudo yum install make
+  ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Guia de Instalação
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+#### Clone o repositório:
+```
+git clone https://github.com/GiovaniAppezzato/health-dashboard-backend
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+#### Copiar .env
+```
+cp .env.example .env
+```
+<sup>Verifique se não há nenhum serviço utilizando as mesmas portas em sua máquina. Caso exista, ajuste elas dentro do arquivo.</sup>
 
-## Contributing
+#### Setup com Make
+```
+make setup
+```
+<sup>Este comando deve ser usado apenas em ambiente de desenvolvimento. Para produção, utilize o comando ```build```.</sup>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Setup sem o Make
+<sup>Nesse caso, será necessário executar todos os comandos manualmente, na seguinte sequência:</sup>
+```
+docker compose up -d --build
 
-## Code of Conduct
+docker compose exec app bash
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+composer install
 
-## Security Vulnerabilities
+php artisan key:generate --ansi
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+php artisan storage:link
 
-## License
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Tudo pronto!** 🎉  
+A aplicação estará disponível em: http://localhost:9000
+
+## Execução dos testes
+
+Certifique-se que a aplicação esteja rodando corretamente e rode:
+
+```
+make test
+```
+Ou, alternativamente, execute dentro do container:
+```
+php artisan test
+```
+
+<div align="center">
+  Feito com ♡ por <a href="https://www.linkedin.com/in/giovani-appezzato">Giovani Appezzato</a><br>
+    <b>Por favor, mantenha o código limpo e organizado. Obrigado!</b>
+</div>
